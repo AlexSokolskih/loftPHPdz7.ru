@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="row">
+
+        {% for row in data %}
+            <div class="col-md-4">
+                <h2>{{ row.name }}</h2>
+                <p>{{ row.year }}</p>
+                <p>{{ row.description }}</p>
+                <p><a href="{{ row.site }}" class="btn btn-default">Посмотреть сайт</a></p>
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

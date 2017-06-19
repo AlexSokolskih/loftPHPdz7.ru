@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+
+
+    {% for row in data %}
+        <div class="row">
+            <div class="col-md-4">
+                <p>_______________________________________</p>
+                <h2>name: {{ row.name }}</h2>
+                <p>year: {{ row.age }}</p>
+                <p>adulthood: {{ row.adulthood }}</p>
+                <p>description: {{ row.description }}</p>
+                <p>id: {{ row.id }} </p>
+                <p><img src="/assets/template/img/{{ row.photo }}" width="300" alt=""></p>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
