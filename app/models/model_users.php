@@ -28,3 +28,5 @@ class Model_users extends Model
         return $usersList;
     }
 }
+
+class User extends illuminate\database\Eloquent\Model {}

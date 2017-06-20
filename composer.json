@@ -3,6 +3,7 @@
     "php": ">=5.5.0",
     "phpmailer/phpmailer": "dev-master",
     "google/recaptcha": "~1.1",
-    "intervention/image": "dev-master"
+    "intervention/image": "dev-master",
+    "illuminate/database": "5.4.27"
   }
 }
