@@ -29,4 +29,3 @@ class Model_users extends Model
     }
 }
 
-class User extends illuminate\database\Eloquent\Model {}

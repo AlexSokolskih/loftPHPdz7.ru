@@ -30,7 +30,7 @@ class Route
 
     }
 
-    protected function parse() :void
+    protected function parse()
     {
         $this->partsUrl = explode('/', $this->url);
 
@@ -63,7 +63,7 @@ class Route
 
     }
 
-    protected function getActionName() : void
+    protected function getActionName()
     {
         if (empty($this->partsUrl[2]) === false) {
             $this->action = $this->prefixAction . $this->partsUrl[2];
@@ -83,7 +83,7 @@ class Route
     }
 
 
-    protected function getModelPath() : void
+    protected function getModelPath()
     {
         if (empty($this->partsUrl[1]) === false) {
             $this->model = $this->modelPath . $this->normalizeStringFileName($this->prefixModel . $this->partsUrl[1]);
@@ -115,17 +115,17 @@ class Route
         return include $this->controller;
     }
 
-    protected function isFileExist($fileName) : bool
+    protected function isFileExist($fileName)
     {
         return file_exists($fileName);
     }
 
-    protected function normalizeStringFileName(string $someString) : string
+    protected function normalizeStringFileName(string $someString)
     {
         return strtolower($someString) . '.php';
     }
 
-    public function ErrorPage404() : void
+    public function ErrorPage404()
     {
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
 

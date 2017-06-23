@@ -7,11 +7,11 @@
  * Time: 0:11
  */
 
-namespace Models;
+//namespace Models;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
-class Database {
+class DataBase {
 
 
     function __construct() {
@@ -40,7 +40,35 @@ class Database {
     $capsule->bootEloquent();
 }
 
+
+    public function getUsersList()
+    {
+        $userslist =User::all();   //   $this->pdo->query('SELECT * FROM table_name');
+        while ($row = $userslist) {
+            $users[] = $row;
+        }
+        return $users;
+    }
+
+    public function is_userInDataBase($login)
+    {
+        $user = User::find('login', $login)->first();
+
+
+        var_dump($user);
+        if (is_object($row)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
+
+
+class User extends \Illuminate\Database\Eloquent\Model {}
+
+
 
 /*
 
