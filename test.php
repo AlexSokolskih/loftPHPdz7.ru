@@ -6,7 +6,6 @@
  * Time: 17:59
  */
 require_once 'vendor/autoload.php';
-echo "Sfdesfdsfdsfdsfdsfdsfdsfdsfsd";
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -55,7 +54,6 @@ class DataBase {
         $user = User::find('login', $login)->first();
 
 
-        var_dump($user);
         if (is_object($row)) {
             return true;
         } else {
@@ -70,3 +68,19 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 
 
 $dataBase = new DataBase();
+
+$users=User::all();
+foreach ($users as $user) {
+    echo $user->id.'<br>';
+}
+
+$login='q2';
+
+$user = User::where('login', '=', $login)->get()->toArray();
+var_dump($user);
+
+if (is_array($user[0])) {
+    echo 'true';
+} else {
+    echo 'false';
+}

@@ -52,12 +52,26 @@ class DataBase {
 
     public function is_userInDataBase($login)
     {
-        $user = User::find('login', $login)->first();
+        $user = User::where('login', '=', $login)->get()->toArray();
 
+        if (is_array($user[0])) {
+            echo 'true';
+        } else {
+            echo 'false';
+        }
+    }
 
-        var_dump($user);
+    public function userAndPasswordConformity($login, $password)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+        $stmt->execute([$login]);
+        $row = $stmt->fetch(PDO::FETCH_LAZY);
         if (is_object($row)) {
-            return true;
+            if ($password == $row['password']) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
