@@ -51,11 +51,29 @@ class DataBase {
 
     public function is_userInDataBase($login)
     {
-        $user = User::find('login', $login)->first();
+        $user = User::where('login', '=', $login)->get()->toArray();
+
+        if (is_array($user[0])) {
+            echo 'true';
+        } else {
+            echo 'false';
+        }
+    }
 
 
-        if (is_object($row)) {
-            return true;
+    public function userAndPasswordConformity($login='', $password='')
+    {
+
+        $passwordInBase =  User::where('login', '=', $login)->first();//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+        echo 'sdsdsdsdsd';
+        var_dump($passwordInBase->password);
+
+        if ($passwordInBase != '') {
+            if ($password == $passwordInBase) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -69,18 +87,4 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 
 $dataBase = new DataBase();
 
-$users=User::all();
-foreach ($users as $user) {
-    echo $user->id.'<br>';
-}
-
-$login='q2';
-
-$user = User::where('login', '=', $login)->get()->toArray();
-var_dump($user);
-
-if (is_array($user[0])) {
-    echo 'true';
-} else {
-    echo 'false';
-}
+$dataBase -> userAndPasswordConformity('q1','q1');

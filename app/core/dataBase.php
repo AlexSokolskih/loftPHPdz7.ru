@@ -61,13 +61,15 @@ class DataBase {
         }
     }
 
-    public function userAndPasswordConformity($login, $password)
+    public function userAndPasswordConformity($login='', $password='')
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
-        $stmt->execute([$login]);
-        $row = $stmt->fetch(PDO::FETCH_LAZY);
-        if (is_object($row)) {
-            if ($password == $row['password']) {
+        var_dump($login);
+        echo ($login.'sdffffffffffffffffffffffffffffffffffffff<br>'.$password);
+        $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+
+
+        if ($passwordInBase != '') {
+            if ($password == $passwordInBase) {
                 return true;
             } else {
                 return false;
