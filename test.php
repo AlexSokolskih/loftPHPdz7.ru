@@ -64,9 +64,9 @@ class DataBase {
     public function userAndPasswordConformity($login='', $password='')
     {
 
-        $passwordInBase =  User::where('login', '=', $login)->first();//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
-        echo 'sdsdsdsdsd';
-        var_dump($passwordInBase->password);
+        $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+        echo '<br>'.$login.'<br>'.$password.'<br>';
+        var_dump($passwordInBase);
 
         if ($passwordInBase != '') {
             if ($password == $passwordInBase) {
@@ -87,4 +87,4 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 
 $dataBase = new DataBase();
 
-$dataBase -> userAndPasswordConformity('q1','q1');
+var_dump($dataBase -> userAndPasswordConformity('q3','q3'));
