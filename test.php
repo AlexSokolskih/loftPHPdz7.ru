@@ -87,4 +87,5 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 
 $dataBase = new DataBase();
 
-var_dump($dataBase -> userAndPasswordConformity('q3','q3'));
+//var_dump($dataBase -> userAndPasswordConformity('q2','$6$naborSimvolovFor$s7j6Oyieq2YQ/O/vd52VtEQ.XuY1YQymDFZIC6TcsuJ0NQ0D34I30UayGAztBezxxsSZpV0vJPbHRUqRIE5AQ'));
+var_dump($dataBase->is_userInDataBase('q2'));
