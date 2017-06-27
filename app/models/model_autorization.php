@@ -28,6 +28,7 @@ class Model_autorization extends Model
                 session_write_close();
 
                 $message = 'Авторизация неуспешна';
+                $message .= $user.'<br>'.$main->cpyptPassword($password).'@@@@@@@@@@@@@@@@@qwe';
             }
         }
 

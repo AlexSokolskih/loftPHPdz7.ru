@@ -55,14 +55,15 @@ class DataBase {
         $user = User::where('login', '=', $login)->get()->toArray();
 
         if (is_array($user[0])) {
-            echo 'true';
+            return 'true';
         } else {
-            echo 'false';
+            return 'false';
         }
     }
 
     public function userAndPasswordConformity($login='', $password='')
     {
+
 
         $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
 
