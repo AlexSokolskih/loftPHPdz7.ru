@@ -21,7 +21,6 @@ class Model_autorization extends Model
             }
 
             if ($dataBase->is_userInDataBase($user) and $dataBase->userAndPasswordConformity($user, $main->cpyptPassword($password))) {
-
                 $_SESSION['authorized'] = true;
                 $message = 'Авторизация успешна';
             } else {

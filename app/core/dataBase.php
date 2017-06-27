@@ -66,16 +66,12 @@ class DataBase {
 
         $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
 
-
-        if ($passwordInBase != '') {
             if ($password == $passwordInBase) {
                 return true;
             } else {
                 return false;
             }
-        } else {
-            return false;
-        }
+
     }
 
 }
