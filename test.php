@@ -42,11 +42,21 @@ class DataBase {
 
     public function getUsersList()
     {
-        $userslist =User::all();   //   $this->pdo->query('SELECT * FROM table_name');
+        $userslist =User::all()->toArray();   //   $this->pdo->query('SELECT * FROM table_name');
+
+
+        var_dump($userslist);
+        foreach ($userslist as $value){
+            $users[]=$value;
+        }
+
+
+        /*
         while ($row = $userslist) {
             $users[] = $row;
         }
-        return $users;
+        */
+        return $userslist;
     }
 
     public function is_userInDataBase($login)
@@ -88,4 +98,6 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 $dataBase = new DataBase();
 
 //var_dump($dataBase -> userAndPasswordConformity('q2','$6$naborSimvolovFor$s7j6Oyieq2YQ/O/vd52VtEQ.XuY1YQymDFZIC6TcsuJ0NQ0D34I30UayGAztBezxxsSZpV0vJPbHRUqRIE5AQ'));
-var_dump($dataBase->is_userInDataBase('q2'));
+//var_dump($dataBase->is_userInDataBase('q2'));
+
+$dataBase->getUsersList();

@@ -43,11 +43,9 @@ class DataBase {
 
     public function getUsersList()
     {
-        $userslist =User::all();   //   $this->pdo->query('SELECT * FROM table_name');
-        while ($row = $userslist) {
-            $users[] = $row;
-        }
-        return $users;
+        $userslist =User::all()->toArray();   //   $this->pdo->query('SELECT * FROM table_name');
+
+        return $userslist;
     }
 
     public function is_userInDataBase($login)
@@ -63,8 +61,6 @@ class DataBase {
 
     public function userAndPasswordConformity($login='', $password='')
     {
-
-
         $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
 
             if ($password == $passwordInBase) {
@@ -72,7 +68,6 @@ class DataBase {
             } else {
                 return false;
             }
-
     }
 
 }
