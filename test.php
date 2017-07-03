@@ -5,9 +5,17 @@
  * Date: 23.06.2017
  * Time: 17:59
  */
+
+
+
+$arr=[1,2,3];
+var_dump($arr);
+
 require_once 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+
+
 
 
 class DataBase {

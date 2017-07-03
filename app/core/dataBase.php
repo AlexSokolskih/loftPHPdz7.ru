@@ -79,7 +79,6 @@ class DataBase {
             $user->save();
             return true;
         } catch (Exception $e) {
-            echo '<br><br><br>asdasdas<br>';
             var_dump($e);
             return false;
         }
