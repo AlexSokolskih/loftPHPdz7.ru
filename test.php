@@ -42,21 +42,11 @@ class DataBase {
 
     public function getUsersList()
     {
-        $userslist =User::all()->toArray();   //   $this->pdo->query('SELECT * FROM table_name');
-
-
-        var_dump($userslist);
-        foreach ($userslist as $value){
-            $users[]=$value;
-        }
-
-
-        /*
+        $userslist =User::all();   //   $this->pdo->query('SELECT * FROM table_name');
         while ($row = $userslist) {
             $users[] = $row;
         }
-        */
-        return $userslist;
+        return $users;
     }
 
     public function is_userInDataBase($login)
@@ -64,9 +54,9 @@ class DataBase {
         $user = User::where('login', '=', $login)->get()->toArray();
 
         if (is_array($user[0])) {
-            echo 'true';
+           return true;
         } else {
-            echo 'false';
+            return false;
         }
     }
 
@@ -89,6 +79,22 @@ class DataBase {
         }
     }
 
+
+    public function saveNewUser($login, $password)
+    {
+        try {
+            $user = new User;
+            $user->login=$login;
+            $user->password=$password;
+            $user->save();
+            return true;
+        } catch (Exception $e) {
+            echo '<br><br><br>asdasdas<br>';
+            var_dump($e);
+            return false;
+        }
+    }
+
 }
 
 
@@ -98,6 +104,6 @@ class User extends \Illuminate\Database\Eloquent\Model {}
 $dataBase = new DataBase();
 
 //var_dump($dataBase -> userAndPasswordConformity('q2','$6$naborSimvolovFor$s7j6Oyieq2YQ/O/vd52VtEQ.XuY1YQymDFZIC6TcsuJ0NQ0D34I30UayGAztBezxxsSZpV0vJPbHRUqRIE5AQ'));
-//var_dump($dataBase->is_userInDataBase('q2'));
+//var_dump($dataBase->is_userInDataBase('q34'));
 
-$dataBase->getUsersList();
+$dataBase->saveNewUser('g5', 'q5');

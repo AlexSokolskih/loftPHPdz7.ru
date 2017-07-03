@@ -43,7 +43,7 @@ class DataBase {
 
     public function getUsersList()
     {
-        $userslist =User::all()->toArray();   //   $this->pdo->query('SELECT * FROM table_name');
+        $userslist =User::all()-> toArray();   //   $this->pdo->query('SELECT * FROM table_name');
 
         return $userslist;
     }
@@ -53,9 +53,9 @@ class DataBase {
         $user = User::where('login', '=', $login)->get()->toArray();
 
         if (is_array($user[0])) {
-            return 'true';
+            return true;
         } else {
-            return 'false';
+            return false;
         }
     }
 
@@ -68,6 +68,21 @@ class DataBase {
             } else {
                 return false;
             }
+    }
+
+    public function saveNewUser($login, $password)
+    {
+        try {
+            $user = new User;
+            $user->login=$login;
+            $user->password=$password;
+            $user->save();
+            return true;
+        } catch (Exception $e) {
+            echo '<br><br><br>asdasdas<br>';
+            var_dump($e);
+            return false;
+        }
     }
 
 }
