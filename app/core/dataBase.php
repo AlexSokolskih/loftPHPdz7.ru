@@ -11,6 +11,11 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
+
+
+
+
+
 class DataBase {
 
 
@@ -38,6 +43,12 @@ class DataBase {
     // Setup the Eloquent ORM…
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
+
+       /* Capsule::schema()->table('users', function ($table){
+            $table->integer('ip')->nullable();
+            //$table->timestamps();
+        });
+       */
 }
 
 
@@ -70,12 +81,13 @@ class DataBase {
             }
     }
 
-    public function saveNewUser($login, $password)
+    public function saveNewUser($login, $password, $ip)
     {
         try {
             $user = new User;
             $user->login=$login;
             $user->password=$password;
+            $user->ip=$ip;
             $user->save();
             return true;
         } catch (Exception $e) {
@@ -88,7 +100,6 @@ class DataBase {
 
 
 class User extends \Illuminate\Database\Eloquent\Model {}
-
 
 
 /*

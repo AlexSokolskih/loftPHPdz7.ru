@@ -64,7 +64,7 @@ class Model_registration extends Model
             $message = 'Ошибка Пустое поле ';
         } elseif (!Model_registration::recaptca()) {
             $message = 'рекапчу не разгадал ';
-        } elseif ($dataBase->saveNewUser($newLogin, $criptPassword)) {
+        } elseif ($dataBase->saveNewUser($newLogin, $criptPassword, $_SERVER['REMOTE_ADDR'])) {
             $message = 'Добавлен успешно';
 
 
