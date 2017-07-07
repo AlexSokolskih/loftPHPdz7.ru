@@ -28,8 +28,6 @@ class Model_files extends Model
             $font->angle(45);
         });
         $image->save($_SERVER['DOCUMENT_ROOT'] . '/assets/template/img/' . $_POST["imageFile"]);
-        echo($_SERVER['DOCUMENT_ROOT'] . '/assets/template/img/' . $_POST["imageFile"]);
-        var_dump($_POST);
     }
 
     public function get_data()

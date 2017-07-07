@@ -44,11 +44,11 @@ class DataBase {
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
 
-       /* Capsule::schema()->table('users', function ($table){
-            $table->integer('ip')->nullable();
+        /*Capsule::schema()->table('users', function ($table){
+            $table->string('ip',16)->nullable();
             //$table->timestamps();
-        });
-       */
+        }); */
+
 }
 
 
@@ -57,6 +57,13 @@ class DataBase {
         $userslist =User::all()-> toArray();   //   $this->pdo->query('SELECT * FROM table_name');
 
         return $userslist;
+    }
+
+    public function getUser($user_id)
+    {
+        $user = User::find($user_id)->toArray();
+        return $user;
+
     }
 
     public function is_userInDataBase($login)
@@ -94,6 +101,25 @@ class DataBase {
             var_dump($e);
             return false;
         }
+    }
+
+    public function deleteUser($user_id)
+    {
+        $user = User::find($user_id);
+        $user ->delete();
+    }
+
+    public function updateUser($user)
+    {
+        $userNewData = User::find($user->id);
+        $userNewData->login=$user->login;
+        $userNewData->name=$user->name;
+        $userNewData->age=$user->age;
+        $userNewData->description=$user->description;
+        if (!empty($user->photo)){
+            $userNewData->photo=$user->photo;
+        }
+        $userNewData->save();
     }
 
 }

@@ -13,6 +13,8 @@
                 <p>adulthood: {{ row.adulthood }}</p>
                 <p>description: {{ row.description }}</p>
                 <p>id: {{ row.id }} </p>
+                <a href="/users/delete/{{ row.id }}">Удалить</a>
+                <a href="/users/edit/{{ row.id }}">Редактировать</a>
                 <p><img src="/assets/template/img/{{ row.photo }}" width="300" alt=""></p>
             </div>
         </div>

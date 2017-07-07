@@ -6,6 +6,7 @@
  * Date: 12.03.2017
  * Time: 20:40
  */
+use Intervention\Image\ImageManager;
 class Main
 {
     public static $myConfig = array('from_name' => 'приложение', 'adminEmail' => 'xaam1@ya.ru');
@@ -71,12 +72,15 @@ class Main
     {
         // TODO! добавить ресайз изображений
         $uploaddir = '/var/www/uploads/';
+
+        $imgdir ="assets/template/img/";
         ini_set('upload_max_filesize', '2M');
         if (empty($_FILES['userfoto'])) {
             $file = null;
         } else {
             $file = $_FILES['userfoto'];
         }
+
         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $img_exts = ['jpeg', 'jpg', 'png', 'gif'];
         if (!in_array($extension, $img_exts)) {
@@ -100,12 +104,25 @@ class Main
             die ('не правильный формат файла 3');
         }
         $filename = date('U') . rand(1, 100000);
-        move_uploaded_file($file['tmp_name'], 'photos/' . $filename . '.' . $extension);
-        $imageSize = getimagesize('photos/' . $filename . '.' . $extension);
+        move_uploaded_file($file['tmp_name'], $imgdir . $filename . '.' . $extension);
+
+
+       /* $imageSize = getimagesize($imgdir . $filename . '.' . $extension);
         $image_p = imagecreatetruecolor($imageSize[0] - 1, $imageSize[1]);
-        $image = imagecreatefromjpeg('photos/' . $filename . '.' . $extension);
+
+
+        $image = imagecreatefromjpeg($imgdir . $filename . '.' . $extension);
         imagecopyresampled($image_p, $image, 0, 0, 0, 0, $imageSize[0], $imageSize[1], $imageSize[0], $imageSize[1]);
-        imagejpeg($image_p, 'photos/' . $filename . '.' . $extension, 100);
+        imagejpeg($image_p, $imgdir . $filename . '.' . $extension, 100);*/
+
+
+// create an image manager instance with favored driver
+        $manager = new ImageManager(array('driver' => 'gd'));
+
+// to finally create image instances
+        $image = $manager->make($_SERVER['DOCUMENT_ROOT'] .'/'.  $imgdir . $filename . '.' . $extension);
+        $image->resize(400, 400);
+        $image->save($_SERVER['DOCUMENT_ROOT'] .'/'.  $imgdir . $filename . '.' . $extension);
         return $filename . '.' . $extension;
     }
 

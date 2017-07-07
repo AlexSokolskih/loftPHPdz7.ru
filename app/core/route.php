@@ -21,6 +21,8 @@ class Route
     protected $controllerName = 'Main';
     protected $modelName = 'Main';
 
+    protected $actionObject='';
+
     public function __construct()
     {
         $this->url = $_SERVER['REQUEST_URI'];
@@ -40,6 +42,8 @@ class Route
         $this->getControllerName();
         $this->getModelName();
         $this->getActionName();
+
+        $this->getActionObjectName();
 
     }
 
@@ -69,6 +73,16 @@ class Route
             $this->action = $this->prefixAction . $this->partsUrl[2];
         } else {
             $this->action = $this->prefixAction . $this->action;
+        }
+
+    }
+
+    protected function getActionObjectName()
+    {
+        if (empty($this->partsUrl[3]) === false) {
+            $this->actionObject = $this->partsUrl[3];
+        } else {
+            $this->actionObject = $this->actionObject;
         }
 
     }
@@ -139,9 +153,14 @@ class Route
 
         $controller = new $this->controllerName;
         $action = $this->action;
+        $actionObject = $this -> actionObject;
 
         if (method_exists($controller, $action)) {
-            $controller->$action();
+            if($actionObject === ''){
+                $controller->$action();
+            } else {
+                $controller->$action($actionObject);
+            }
         } else {
             $this->ErrorPage404();
         }
