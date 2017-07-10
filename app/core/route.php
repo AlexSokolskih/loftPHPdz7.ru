@@ -141,11 +141,19 @@ class Route
 
     public function ErrorPage404()
     {
+        require_once 'app/controllers/controller_404.php';
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
 
         header('HTTP/1.1 404 Not Found');
         header('Status: 404 Not Found');
-        header('Location:' . $host . '404');
+        //header('Location:' . $host . '404');
+
+        $controller404=new Controller_404();
+        $controller404->view->generate('base_view.twig',
+            [
+                'title' => 'Ошибка 404!',
+                'content' => 'Данной страницы не существует!!!'
+            ]);
     }
 
     public function run()
