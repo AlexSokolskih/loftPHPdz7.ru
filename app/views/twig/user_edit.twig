@@ -6,35 +6,39 @@
 
 
 
-        <div class="row">
-            <form class="form-horizontal" action="/users/update" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <form class="form-horizontal" action="/users/update" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
                 <p>_______________________________________</p>
                 <h2>name: {{ data.name }}</h2>
                 <div class="form-group">
                     <label for="input1" class="col-sm-2 control-label">Логин</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input1" name="login" placeholder="Логин" value="{{ data.login }}">
+                        <input type="text" class="form-control" id="input1" name="login" placeholder="Логин"
+                               value="{{ data.login }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="input2" class="col-sm-2 control-label">Имя</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input2" name="name" placeholder="Имя" value="{{ data.name }}">
+                        <input type="text" class="form-control" id="input2" name="name" placeholder="Имя"
+                               value="{{ data.name }}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="input3" class="col-sm-2 control-label">Возраст</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input3" name="age" placeholder="Возраст" value="{{ data.age }}">
+                        <input type="text" class="form-control" id="input3" name="age" placeholder="Возраст"
+                               value="{{ data.age }}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="input4" class="col-sm-2 control-label">Описание</label>
                     <div class="col-sm-10">
-                        <input type="textarea" class="form-control" id="input4" name="description" placeholder="Описание" value="{{ data.description }}">
+                        <input type="textarea" class="form-control" id="input4" name="description"
+                               placeholder="Описание" value="{{ data.description }}">
                     </div>
                 </div>
 
@@ -43,7 +47,7 @@
                 <div class="form-group">
                     <label for="input5" class="col-sm-2 control-label">Новое фото</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" id="input5" name="userfoto" placeholder="Новое фото" >
+                        <input type="file" class="form-control" id="input5" name="userfoto" placeholder="Новое фото">
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,8 +60,8 @@
                 <a href="/users/delete/{{ data.id }}">Удалить пользователя</a>
 
             </div>
-            </form>
-        </div>
+        </form>
+    </div>
 
 
 {% endblock %}

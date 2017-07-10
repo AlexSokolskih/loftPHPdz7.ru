@@ -31,13 +31,13 @@ class Model_users extends Model
     public function delete_user($user_id)
     {
         $dataBase = new DataBase();
-        $dataBase -> deleteUser($user_id);
+        $dataBase->deleteUser($user_id);
     }
 
     public function get_user($user_id)
     {
         $dataBase = new DataBase();
-        $user = $dataBase -> getUser($user_id);
+        $user = $dataBase->getUser($user_id);
         return $user;
     }
 
@@ -53,8 +53,8 @@ class Model_users extends Model
             'age' => 'required|min_numeric,10|max_numeric,100'
         ]);
 
-       var_dump( $userValid);
-        if ($userValid === true){
+        var_dump($userValid);
+        if ($userValid === true) {
             $user = new User();
             $user->id = $_POST["id"];
             $user->login = $_POST["login"];
@@ -62,20 +62,20 @@ class Model_users extends Model
             $user->age = $_POST["age"];
             $user->description = $_POST["description"];
 
-            if (!empty($_FILES['userfoto']["name"])){
+            if (!empty($_FILES['userfoto']["name"])) {
                 var_dump($_FILES);
                 $main = new Main();
-                $user->photo=$main->savePhoto();
+                $user->photo = $main->savePhoto();
             }
 
             $dataBase = new DataBase();
 
-            $user = $dataBase ->updateUser($user);
+            $user = $dataBase->updateUser($user);
             return true;
         }
 
 
-        return  implode('<br>', $userValid);
+        return implode('<br>', $userValid);
     }
 }
 

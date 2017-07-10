@@ -68,7 +68,7 @@ class Model_registration extends Model
             $message = 'Добавлен успешно';
 
 
-           // $mail->SMTPDebug = 6;
+            // $mail->SMTPDebug = 6;
             $mail->IsSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = "tls";

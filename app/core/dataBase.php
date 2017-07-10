@@ -11,50 +11,46 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
+class DataBase
+{
 
 
+    function __construct()
+    {
+        $host = '127.0.0.1';
+        $db = 'loftschool';
+        $user = 'root';
+        $pass = '';
+        $charset = 'utf8';
+        $dbdriver = 'mysql';
 
 
-
-class DataBase {
-
-
-    function __construct() {
-    $host = '127.0.0.1';
-    $db = 'loftschool';
-    $user = 'root';
-    $pass = '';
-    $charset = 'utf8';
-    $dbdriver='mysql';
-
-
-
-    $capsule = new Capsule;
-    $capsule->addConnection([
-     'driver' => $dbdriver,
-     'host' => $host,
-     'database' => $db,
-     'username' => $user,
-     'password' => $pass,
-     'charset' => $charset,
-     'collation' => 'utf8_unicode_ci',
-     'prefix' => '',
-    ]);
-    // Setup the Eloquent ORM…
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
+        $capsule = new Capsule;
+        $capsule->addConnection([
+            'driver' => $dbdriver,
+            'host' => $host,
+            'database' => $db,
+            'username' => $user,
+            'password' => $pass,
+            'charset' => $charset,
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+        ]);
+        // Setup the Eloquent ORM…
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
 
         /*Capsule::schema()->table('users', function ($table){
             $table->string('ip',16)->nullable();
             //$table->timestamps();
         }); */
 
-}
+    }
 
 
     public function getUsersList()
     {
-        $userslist =User::all()-> toArray();   //   $this->pdo->query('SELECT * FROM table_name');
+        $userslist = User::all()->toArray();   //   $this->pdo->query('SELECT * FROM table_name');
 
         return $userslist;
     }
@@ -77,24 +73,24 @@ class DataBase {
         }
     }
 
-    public function userAndPasswordConformity($login='', $password='')
+    public function userAndPasswordConformity($login = '', $password = '')
     {
-        $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+        $passwordInBase = User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
 
-            if ($password == $passwordInBase) {
-                return true;
-            } else {
-                return false;
-            }
+        if ($password == $passwordInBase) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function saveNewUser($login, $password, $ip)
     {
         try {
             $user = new User;
-            $user->login=$login;
-            $user->password=$password;
-            $user->ip=$ip;
+            $user->login = $login;
+            $user->password = $password;
+            $user->ip = $ip;
             $user->save();
             return true;
         } catch (Exception $e) {
@@ -106,18 +102,18 @@ class DataBase {
     public function deleteUser($user_id)
     {
         $user = User::find($user_id);
-        $user ->delete();
+        $user->delete();
     }
 
     public function updateUser($user)
     {
         $userNewData = User::find($user->id);
-        $userNewData->login=$user->login;
-        $userNewData->name=$user->name;
-        $userNewData->age=$user->age;
-        $userNewData->description=$user->description;
-        if (!empty($user->photo)){
-            $userNewData->photo=$user->photo;
+        $userNewData->login = $user->login;
+        $userNewData->name = $user->name;
+        $userNewData->age = $user->age;
+        $userNewData->description = $user->description;
+        if (!empty($user->photo)) {
+            $userNewData->photo = $user->photo;
         }
         $userNewData->save();
     }
@@ -125,7 +121,9 @@ class DataBase {
 }
 
 
-class User extends \Illuminate\Database\Eloquent\Model {}
+class User extends \Illuminate\Database\Eloquent\Model
+{
+}
 
 
 /*

@@ -21,7 +21,7 @@ class Route
     protected $controllerName = 'Main';
     protected $modelName = 'Main';
 
-    protected $actionObject='';
+    protected $actionObject = '';
 
     public function __construct()
     {
@@ -149,7 +149,7 @@ class Route
         header('Status: 404 Not Found');
         //header('Location:' . $host . '404');
 
-        $controller404=new Controller_404();
+        $controller404 = new Controller_404();
         $controller404->view->generate('base_view.twig',
             [
                 'title' => 'Ошибка 404!',
@@ -162,10 +162,10 @@ class Route
 
         $controller = new $this->controllerName;
         $action = $this->action;
-        $actionObject = $this -> actionObject;
+        $actionObject = $this->actionObject;
 
         if (method_exists($controller, $action)) {
-            if($actionObject === ''){
+            if ($actionObject === '') {
                 $controller->$action();
             } else {
                 $controller->$action($actionObject);

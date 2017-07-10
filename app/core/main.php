@@ -7,6 +7,7 @@
  * Time: 20:40
  */
 use Intervention\Image\ImageManager;
+
 class Main
 {
     public static $myConfig = array('from_name' => 'приложение', 'adminEmail' => 'xaam1@ya.ru');
@@ -73,7 +74,7 @@ class Main
         // TODO! добавить ресайз изображений
         $uploaddir = '/var/www/uploads/';
 
-        $imgdir ="assets/template/img/";
+        $imgdir = "assets/template/img/";
         ini_set('upload_max_filesize', '2M');
         if (empty($_FILES['userfoto'])) {
             $file = null;
@@ -107,22 +108,22 @@ class Main
         move_uploaded_file($file['tmp_name'], $imgdir . $filename . '.' . $extension);
 
 
-       /* $imageSize = getimagesize($imgdir . $filename . '.' . $extension);
-        $image_p = imagecreatetruecolor($imageSize[0] - 1, $imageSize[1]);
-
-
-        $image = imagecreatefromjpeg($imgdir . $filename . '.' . $extension);
-        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $imageSize[0], $imageSize[1], $imageSize[0], $imageSize[1]);
-        imagejpeg($image_p, $imgdir . $filename . '.' . $extension, 100);*/
+        /* $imageSize = getimagesize($imgdir . $filename . '.' . $extension);
+         $image_p = imagecreatetruecolor($imageSize[0] - 1, $imageSize[1]);
+ 
+ 
+         $image = imagecreatefromjpeg($imgdir . $filename . '.' . $extension);
+         imagecopyresampled($image_p, $image, 0, 0, 0, 0, $imageSize[0], $imageSize[1], $imageSize[0], $imageSize[1]);
+         imagejpeg($image_p, $imgdir . $filename . '.' . $extension, 100);*/
 
 
 // create an image manager instance with favored driver
         $manager = new ImageManager(array('driver' => 'gd'));
 
 // to finally create image instances
-        $image = $manager->make($_SERVER['DOCUMENT_ROOT'] .'/'.  $imgdir . $filename . '.' . $extension);
+        $image = $manager->make($_SERVER['DOCUMENT_ROOT'] . '/' . $imgdir . $filename . '.' . $extension);
         $image->resize(400, 400);
-        $image->save($_SERVER['DOCUMENT_ROOT'] .'/'.  $imgdir . $filename . '.' . $extension);
+        $image->save($_SERVER['DOCUMENT_ROOT'] . '/' . $imgdir . $filename . '.' . $extension);
         return $filename . '.' . $extension;
     }
 

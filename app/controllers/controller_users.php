@@ -54,8 +54,7 @@ class Controller_users extends Controller
         $validation = $this->model->update_user();
         if ($validation === true) {
             $this->action_index();
-        }
-        else{
+        } else {
             $user_id = $_POST["id"];
             $data = $this->model->get_user($user_id);
             $this->view->generate('user_edit.twig',

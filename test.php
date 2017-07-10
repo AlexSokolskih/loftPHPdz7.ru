@@ -7,8 +7,7 @@
  */
 
 
-
-$arr=[1,2,3];
+$arr = [1, 2, 3];
 var_dump($arr);
 
 require_once 'vendor/autoload.php';
@@ -16,19 +15,18 @@ require_once 'vendor/autoload.php';
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 
+class DataBase
+{
 
 
-class DataBase {
-
-
-    function __construct() {
+    function __construct()
+    {
         $host = '127.0.0.1';
         $db = 'loftschool';
         $user = 'root';
         $pass = '';
         $charset = 'utf8';
-        $dbdriver='mysql';
-
+        $dbdriver = 'mysql';
 
 
         $capsule = new Capsule;
@@ -50,7 +48,7 @@ class DataBase {
 
     public function getUsersList()
     {
-        $userslist =User::all();   //   $this->pdo->query('SELECT * FROM table_name');
+        $userslist = User::all();   //   $this->pdo->query('SELECT * FROM table_name');
         while ($row = $userslist) {
             $users[] = $row;
         }
@@ -62,18 +60,18 @@ class DataBase {
         $user = User::where('login', '=', $login)->get()->toArray();
 
         if (is_array($user[0])) {
-           return true;
+            return true;
         } else {
             return false;
         }
     }
 
 
-    public function userAndPasswordConformity($login='', $password='')
+    public function userAndPasswordConformity($login = '', $password = '')
     {
 
-        $passwordInBase =  User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
-        echo '<br>'.$login.'<br>'.$password.'<br>';
+        $passwordInBase = User::where('login', '=', $login)->first()->password;//->toArray(); //$this->pdo->prepare('SELECT * FROM table_name WHERE login= :login');
+        echo '<br>' . $login . '<br>' . $password . '<br>';
         var_dump($passwordInBase);
 
         if ($passwordInBase != '') {
@@ -92,8 +90,8 @@ class DataBase {
     {
         try {
             $user = new User;
-            $user->login=$login;
-            $user->password=$password;
+            $user->login = $login;
+            $user->password = $password;
             $user->save();
             return true;
         } catch (Exception $e) {
@@ -106,7 +104,9 @@ class DataBase {
 }
 
 
-class User extends \Illuminate\Database\Eloquent\Model {}
+class User extends \Illuminate\Database\Eloquent\Model
+{
+}
 
 
 $dataBase = new DataBase();
