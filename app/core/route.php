@@ -126,6 +126,7 @@ class Route
 
     protected function includeController()
     {
+
         return include $this->controller;
     }
 
